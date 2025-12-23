@@ -128,10 +128,19 @@ function App() {
             </a>
             <button
               onClick={() => {
-                const email = prompt('Ingrese su correo electrónico:');
-                if (email) {
-                  window.location.href = `mailto:gerardogomezsanchez@gmail.com?subject=Agregar Contacto&body=Mi correo es: ${email}`;
-                }
+                const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Ing.Gerardo Sistemas
+TEL:+526121423681
+END:VCARD`;
+
+                const blob = new Blob([vcard], { type: 'text/vcard' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'Ing.Gerardo Sistemas.vcf';
+                link.click();
+                URL.revokeObjectURL(url);
               }}
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30"
             >
